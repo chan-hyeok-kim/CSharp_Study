@@ -121,6 +121,7 @@ namespace Algorithm
             return newRoom;
         }
 
+        // O(1)
         public void Remove(MyLinkedListNode<T> room)
         {
             // [기존의 첫번째 방 다음 방]을 [첫번째 방]으로 인정 
