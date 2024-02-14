@@ -14,7 +14,7 @@
             Map map = new Map();
             Player player = new Player();
             map.Initialize(25, player);
-            player.Initialize(1, 1, map.Size-2, map.Size-2, player);
+            player.Initialize(1, 1, map);
 
             const int WAIT_TICK = 1000 / 30;
             int lastTick = 0;
