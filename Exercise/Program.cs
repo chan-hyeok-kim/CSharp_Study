@@ -1,14 +1,16 @@
 ﻿namespace Exercise
 {
-    /*  DFS (Depth First Search 깊이 우선 탐색)
+    /*  DFS (Depth First Search 깊이 우선 탐색) 
+     *  : 다양한 용도로 사용
      *  BFS (Breadth First Search 너비 우선 탐색)
+     *  : 주로 길찾기에 사용
      */
     class Graph
     {
         static void Main(String[] args)
         {
             Graph graph = new Graph();
-            graph.DFS(3);
+            graph.SearchAll();
         }
 
         int[,] adj = new int[6, 6]
@@ -31,10 +33,10 @@
             new List<int>(){ 4 },
         };
 
-        bool[] visited = new bool[6];
+        
         // 1) 우선 now부터 방문하고,
         // 2) now와 연결된 정점들을 하나씩 확인해서, [아직 미발견(미방문) 상태라면 ] 방문한다
-        public void DFS(int now)
+        public void DFS(int now, bool[] visited)
         {
             Console.WriteLine(now);
             visited[now] = true;
@@ -58,18 +60,30 @@
                 if (visited[next])
                     continue; 
                 
-                DFS(next);
+                DFS(next, visited);
             }
         }
 
-        public void DFS2(int now)
+        public void DFS2(int now, bool[] visited)
         {
             Console.WriteLine(now);
             visited[now]= true; // 1) 우선 now 방문
 
             foreach(int next in adj2[now])
             {
+                if (visited[next]) // 방문했으면 스킵
+                    continue;
+                DFS2(next, visited);
+            }
+        }
 
+        public void SearchAll()
+        {
+            bool[] visited = new bool[6];
+            for(int now = 0; now < adj.GetLength(0); now++)
+            {
+                if (!visited[now])
+                    DFS(now, visited);
             }
         }
     }
